@@ -10,27 +10,27 @@ export function BrandProfilePanel({ profile, partial, partialReason }: BrandProf
   return (
     <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-5 mb-6">
       <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
-        Шаг 2 — извлечённый бренд-профиль
+        Brand Profile
       </p>
 
       {partial && (
         <div className="mb-3 px-3 py-2 bg-yellow-50 border border-yellow-200 rounded text-xs text-yellow-800">
-          ⚠️ {partialReason ?? 'Частичная выгрузка контента.'}
+          ⚠️ {partialReason ?? 'Partial content extraction.'}
         </div>
       )}
 
       <table className="w-full text-sm border-collapse">
         <tbody>
-          <Row label="Что делают" value={profile.what_they_do} />
-          <Row label="Аудитория" value={profile.target_audience} />
-          <Row label="Тон бренда" value={profile.tone_of_voice} />
+          <Row label="What they do" value={profile.what_they_do} />
+          <Row label="Target audience" value={profile.target_audience} />
+          <Row label="Tone of voice" value={profile.tone_of_voice} />
           <Row label="Value proposition" value={profile.value_proposition} />
         </tbody>
       </table>
 
       {profile.color_palette.length > 0 && (
         <div className="mt-3 flex items-center gap-3">
-          <span className="text-sm text-gray-500 w-36 shrink-0">Палитра</span>
+          <span className="text-sm text-gray-500 w-36 shrink-0">Color palette</span>
           <div className="flex gap-2 items-center">
             {profile.color_palette.map((hex) => (
               <div

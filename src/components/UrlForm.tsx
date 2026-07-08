@@ -14,7 +14,6 @@ export function UrlForm() {
     setLoading(true)
     try {
       const trimmed = url.trim()
-      // Ensure URL has protocol
       const normalized = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
       const { projectId } = await createProjectFn({ data: { url: normalized } })
       navigate({ to: '/p/$projectId', params: { projectId } })
@@ -26,28 +25,29 @@ export function UrlForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-xl">
+    <form onSubmit={handleSubmit} className="w-full">
       <div className="flex gap-2">
         <input
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          placeholder="https://example.com"
+          placeholder="https://yourcompany.com"
           disabled={loading}
           className="flex-1 border border-gray-300 rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-60 transition"
           required
+          autoFocus
         />
         <button
           type="submit"
           disabled={loading || !url.trim()}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors min-w-[140px]"
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg text-sm font-semibold hover:bg-blue-700 disabled:opacity-50 transition-colors min-w-[140px]"
         >
           {loading ? (
             <span className="flex items-center gap-2 justify-center">
               <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
               Generating…
             </span>
-          ) : 'Generate Ads'}
+          ) : 'Generate Ads →'}
         </button>
       </div>
       {error && (

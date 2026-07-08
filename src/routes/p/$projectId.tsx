@@ -76,7 +76,7 @@ function ProjectPage() {
       <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
         <div className="bg-white border border-red-200 rounded-xl p-8 max-w-md text-center">
           <p className="text-red-600 font-medium">Generation failed</p>
-          <p className="text-gray-600 text-sm mt-2">{project.error_message ?? 'Unknown error.'}</p>
+          <p className="text-gray-600 text-sm mt-2">{project.error_message ?? 'Something went wrong. Please try another URL.'}</p>
           <button
             onClick={() => navigate({ to: '/' })}
             className="mt-4 text-blue-600 text-sm hover:underline"
@@ -102,7 +102,7 @@ function ProjectPage() {
   return (
     <main className="min-h-screen bg-gray-50">
       <header className="bg-white border-b border-gray-200 px-6 py-3 flex items-center gap-3">
-        <a href="/" className="text-gray-400 text-sm hover:text-gray-600 shrink-0">← url-to-ad</a>
+        <a href="/" className="text-gray-400 text-sm hover:text-gray-600 shrink-0">← New URL</a>
         <p className="text-xs text-gray-400 truncate flex-1" title={project.url}>
           {project.url}
         </p>
@@ -118,7 +118,7 @@ function ProjectPage() {
         )}
 
         <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
-          Шаг 3 — сгенерированные объявления (Facebook-style, редактируемые)
+          Ad Creatives — click any text to edit inline
         </p>
         <div className="flex flex-wrap gap-4">
           {ads.map((ad) => (
@@ -135,9 +135,9 @@ function ProjectPage() {
 
         {metrics && (
           <p className="mt-6 text-xs text-gray-400 text-right">
-            Generated in {((metrics.fetch_ms + metrics.llm_ms) / 1000).toFixed(1)} s ·{' '}
-            ~{(metrics.tokens_in + metrics.tokens_out).toLocaleString()} tokens ·{' '}
-            ~${metrics.est_cost_usd.toFixed(4)}
+            Generated in {((metrics.fetch_ms + metrics.llm_ms) / 1000).toFixed(1)} s
+            {' · '}~{(metrics.tokens_in + metrics.tokens_out).toLocaleString()} tokens
+            {' · '}~${metrics.est_cost_usd.toFixed(4)}
           </p>
         )}
       </div>

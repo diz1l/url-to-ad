@@ -54,7 +54,7 @@ function EditableField({
     >
       {value}
       <span className="hidden group-hover/edit:inline ml-1.5 text-[10px] text-blue-400 font-medium align-middle">
-        редактируемо
+        edit
       </span>
     </span>
   )
@@ -134,18 +134,18 @@ export function AdCard({ ad, projectId, companyName, imageCandidates, onUpdate }
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs gap-2">
             <span className="text-gray-300 text-lg">□</span>
-            картинка со страницы
+            image from page
           </div>
         )}
         <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-          <span className="text-white text-xs bg-black/50 px-2 py-1 rounded">Сменить</span>
+          <span className="text-white text-xs bg-black/50 px-2 py-1 rounded">Change</span>
         </div>
       </div>
 
       {/* Image picker */}
       {showImagePicker && (
         <div className="px-3 py-2 border-t border-gray-100 bg-gray-50">
-          <p className="text-[11px] text-gray-400 mb-2">Выбери картинку:</p>
+          <p className="text-[11px] text-gray-400 mb-2">Pick an image:</p>
           <div className="flex gap-1.5 flex-wrap mb-2">
             {imageCandidates.map((url) => (
               <img
@@ -157,13 +157,13 @@ export function AdCard({ ad, projectId, companyName, imageCandidates, onUpdate }
               />
             ))}
             {imageCandidates.length === 0 && (
-              <p className="text-[11px] text-gray-400">Картинки не найдены на странице</p>
+              <p className="text-[11px] text-gray-400">No images found on this page</p>
             )}
           </div>
           <div className="flex gap-1.5">
             <input
               type="url"
-              placeholder="Или вставь URL картинки"
+              placeholder="Or paste an image URL"
               value={customImageUrl}
               onChange={(e) => setCustomImageUrl(e.target.value)}
               className="flex-1 text-xs border border-gray-300 rounded px-2 py-1 outline-none focus:ring-1 focus:ring-blue-400"
@@ -173,7 +173,7 @@ export function AdCard({ ad, projectId, companyName, imageCandidates, onUpdate }
               disabled={!customImageUrl}
               className="text-xs bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 disabled:opacity-40"
             >
-              ОК
+              Set
             </button>
           </div>
         </div>
@@ -200,7 +200,7 @@ export function AdCard({ ad, projectId, companyName, imageCandidates, onUpdate }
           onClick={() => setShowImagePicker(!showImagePicker)}
           className="flex-1 flex items-center justify-center gap-1.5 text-[12px] text-gray-600 border border-gray-200 rounded py-1.5 hover:bg-gray-50 transition-colors"
         >
-          <span className="text-gray-400">□</span> Сменить фото
+          <span className="text-gray-400">□</span> Swap Image
         </button>
         <button
           onClick={handleRegenerate}
