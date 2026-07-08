@@ -90,25 +90,25 @@ function ProjectPage() {
 
   const metrics = project.metrics
 
+  const companyName = (() => {
+    try {
+      const part = new URL(project.url).hostname.replace('www.', '').split('.')[0] ?? ''
+      return part.charAt(0).toUpperCase() + part.slice(1)
+    } catch {
+      return 'Company'
+    }
+  })()
+
   return (
     <main className="min-h-screen bg-gray-50">
-      <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-        <div>
-          <a href="/" className="text-gray-400 text-sm hover:text-gray-600">← url-to-ad</a>
-          <p className="text-xs text-gray-400 mt-0.5 truncate max-w-xs" title={project.url}>
-            {project.url}
-          </p>
-        </div>
-        {metrics && (
-          <p className="text-xs text-gray-400 text-right">
-            Generated in {((metrics.fetch_ms + metrics.llm_ms) / 1000).toFixed(1)} s ·{' '}
-            {(metrics.tokens_in + metrics.tokens_out).toLocaleString()} tokens ·{' '}
-            ~${metrics.est_cost_usd.toFixed(4)}
-          </p>
-        )}
+      <header className="bg-white border-b border-gray-200 px-6 py-3 flex items-center gap-3">
+        <a href="/" className="text-gray-400 text-sm hover:text-gray-600 shrink-0">← url-to-ad</a>
+        <p className="text-xs text-gray-400 truncate flex-1" title={project.url}>
+          {project.url}
+        </p>
       </header>
 
-      <div className="max-w-5xl mx-auto px-6 py-8">
+      <div className="max-w-4xl mx-auto px-6 py-6">
         {project.brand_profile && (
           <BrandProfilePanel
             profile={project.brand_profile}
@@ -117,18 +117,29 @@ function ProjectPage() {
           />
         )}
 
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Ad Creatives</h2>
-        <div className="flex flex-wrap gap-6">
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
+          Шаг 3 — сгенерированные объявления (Facebook-style, редактируемые)
+        </p>
+        <div className="flex flex-wrap gap-4">
           {ads.map((ad) => (
             <AdCard
               key={ad.id}
               ad={ad}
               projectId={projectId}
+              companyName={companyName}
               imageCandidates={project.image_candidates ?? []}
               onUpdate={updateAd}
             />
           ))}
         </div>
+
+        {metrics && (
+          <p className="mt-6 text-xs text-gray-400 text-right">
+            Generated in {((metrics.fetch_ms + metrics.llm_ms) / 1000).toFixed(1)} s ·{' '}
+            ~{(metrics.tokens_in + metrics.tokens_out).toLocaleString()} tokens ·{' '}
+            ~${metrics.est_cost_usd.toFixed(4)}
+          </p>
+        )}
       </div>
     </main>
   )
