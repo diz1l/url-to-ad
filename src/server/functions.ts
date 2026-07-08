@@ -5,13 +5,14 @@ import * as db from './db'
 import { runPipeline } from './pipeline'
 import { regenerateSingleAd } from './llm'
 
-// ── Create project + kick off pipeline ────────────────────────────────────────
+// ── Create project + run pipeline synchronously ───────────────────────────────
+// Fire-and-forget doesn't work in Cloudflare Workers (execution context closes
+// after the response is sent). We run the pipeline inline and return when done.
 export const createProjectFn = createServerFn({ method: 'POST' })
   .validator((data: unknown) => CreateProjectInputSchema.parse(data))
   .handler(async ({ data }) => {
     const project = await db.createProject(data.url)
-    // Fire-and-forget pipeline (does not block the response)
-    runPipeline(project.id, project.url).catch(console.error)
+    await runPipeline(project.id, project.url)
     return { projectId: project.id }
   })
 

@@ -40,9 +40,14 @@ export function UrlForm() {
         <button
           type="submit"
           disabled={loading || !url.trim()}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors"
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50 transition-colors min-w-[140px]"
         >
-          {loading ? 'Generating…' : 'Generate Ads'}
+          {loading ? (
+            <span className="flex items-center gap-2 justify-center">
+              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              Generating…
+            </span>
+          ) : 'Generate Ads'}
         </button>
       </div>
       {error && (

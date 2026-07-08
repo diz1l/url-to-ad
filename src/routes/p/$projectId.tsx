@@ -21,8 +21,9 @@ function ProjectPage() {
       setProject(result.project)
       setAds(result.ads)
 
-      // Keep polling while still processing
-      if (result.project.status === 'pending' || result.project.status === 'extracting' || result.project.status === 'generating') {
+      // Poll only if still processing (handles edge cases)
+      const s = result.project.status
+      if (s === 'pending' || s === 'extracting' || s === 'generating') {
         pollRef.current = setTimeout(load, 1500)
       }
     } catch (err) {
