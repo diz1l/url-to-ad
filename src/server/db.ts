@@ -118,3 +118,14 @@ export async function replaceAd(
   if (error) throw new Error(`DB replaceAd: ${error.message}`)
   return data as Ad
 }
+
+export async function getRecentProjects(limit = 10): Promise<Project[]> {
+  const db = getClient()
+  const { data, error } = await db
+    .from('projects')
+    .select('*')
+    .order('created_at', { ascending: false })
+    .limit(limit)
+  if (error) throw new Error(`DB getRecentProjects: ${error.message}`)
+  return (data ?? []) as Project[]
+}

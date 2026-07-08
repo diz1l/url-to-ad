@@ -104,7 +104,7 @@ export function AdCard({ ad, projectId, companyName, imageCandidates, onUpdate }
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden w-72 flex flex-col">
+    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden w-full sm:w-72 flex flex-col">
       {/* Facebook-style header */}
       <div className="flex items-center gap-2 px-3 pt-3 pb-2">
         <InitialsAvatar name={companyName} />

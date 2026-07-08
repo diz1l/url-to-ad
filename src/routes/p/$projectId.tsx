@@ -108,7 +108,7 @@ function ProjectPage() {
         </p>
       </header>
 
-      <div className="max-w-4xl mx-auto px-6 py-6">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6">
         {project.brand_profile && (
           <BrandProfilePanel
             profile={project.brand_profile}
@@ -120,7 +120,7 @@ function ProjectPage() {
         <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
           Ad Creatives — click any text to edit inline
         </p>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-4">
           {ads.map((ad) => (
             <AdCard
               key={ad.id}

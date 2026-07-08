@@ -67,3 +67,10 @@ export const regenerateAdFn = createServerFn({ method: 'POST' })
 
     return { ad: updated }
   })
+
+// ── Get recent projects (history) ─────────────────────────────────────────────
+export const getRecentProjectsFn = createServerFn({ method: 'GET' })
+  .handler(async () => {
+    const projects = await db.getRecentProjects(20)
+    return { projects }
+  })
